@@ -23,10 +23,27 @@ function init()
     $container.append(renderer.domElement);
 
     noGround = [];
-    ground = new Ground(0xffffff, WIDTH, HEIGHT, 10);
+    ground = new Ground(0xfffff, WIDTH, HEIGHT, 10);
     
     player1 = new Player("player1", 0xffff00, new THREE.Vector2(50, 0), 0);
+    enemy   = new Player("enemy", 0x0f0000  , new THREE.Vector2(30, 0), 0);
+
+    res = -1;
+    for (var index = 0; index < noGround.length; index++){
+        if (noGround[index][0] == Math.floor(player1.graphic.position.x) && noGround[index][1] == Math.floor(player1.graphic.position.y)){
+            res = index
+        }
+    }
+
+    if (res >0){
+        noGround.splice(res, 1)
+    }
+
+    console.log(noGround)
     scene.add(player1.graphic);
+    scene.add(enemy.graphic);
+
+
 
     light1 = new Light("sun", 0xffffff, "0,0,340");
     scene.add(light1);
@@ -58,15 +75,17 @@ function Ground(color, size_x, size_y, nb_tile)
                 tmpGround.position.y = y;
                 scene.add(tmpGround);
             }
-            else
+            else{
                 noGround.push([x, y]);
+            }
+                
         }
     }
 }
 
 function Light(name, color, position)
 {
-    pointLight = new THREE.PointLight(color, 50, 350);
+    pointLight = new THREE.PointLight(color, 50, 650);
 
     pointLight.position.x = position.split(',')[0];
     pointLight.position.y = position.split(',')[1];
