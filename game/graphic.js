@@ -39,7 +39,6 @@ function init()
         noGround.splice(res, 1)
     }
 
-    console.log(noGround)
     scene.add(player1.graphic);
     scene.add(enemy.graphic);
 

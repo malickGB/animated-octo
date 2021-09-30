@@ -43,8 +43,6 @@ function collisions()
 function bullet_enemy_collision() {
     //collision between bullet and enemy
     for (var i = 0; i < player1.bullets.length; i++) {
-        console.log(player1.graphic.position.x)
-        console.log(enemy.graphic.position.x)
         if (Math.abs(player1.bullets[i].position.x - enemy.position.x) < 2 && Math.abs(player1.bullets[i].position.y - enemy.position.y) < 2){
 
             scene.remove(enemy.graphic);
